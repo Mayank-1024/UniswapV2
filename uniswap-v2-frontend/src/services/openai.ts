@@ -161,7 +161,7 @@ export const processNaturalLanguage = async (command: string) => {
       function_call: 'auto'
     });
 
-    const functionCall = completion.choices[0].message?.function_call;
+    const functionCall = completion.choices?.[0]?.message?.function_call;
 
     if (!functionCall) {
       return {

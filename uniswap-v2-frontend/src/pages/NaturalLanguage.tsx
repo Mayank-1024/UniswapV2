@@ -83,7 +83,7 @@ export const NaturalLanguage: React.FC = () => {
       recognitionInstance.lang = 'en-US';
 
       recognitionInstance.onresult = (event: SpeechRecognitionEvent) => {
-        const transcript = event.results[0][0].transcript;
+        const transcript = event.results?.[0]?.[0]?.transcript ?? '';
         setCommand(transcript);
         handleCommandSubmit(transcript);
       };

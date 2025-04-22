@@ -202,7 +202,7 @@ export function useWeb3(): Web3Context {
       if (accounts.length === 0) {
         disconnectWallet();
       } else if (isConnected) {
-        setAccount(accounts[0]);
+        setAccount(accounts[0] ?? null);
       }
     };
 
