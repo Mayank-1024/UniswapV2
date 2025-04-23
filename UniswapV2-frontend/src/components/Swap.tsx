@@ -7,15 +7,14 @@ import { usePair } from '../hooks/usePair';
 import { TEST_TOKENS, WETH_ADDRESS } from '../constants/addresses';
 import { useTokenBalance } from '../hooks/useTokenBalance';
 import { ReservesCurve } from './ReservesCurve';
-import { PriceDistributionChart } from './PriceDistributionChart';
 import { SwapRoute } from './SwapRoute';
-import { findBestPath, getAmountsForPath, calculateMultiHopPriceImpact } from '../utils/pathFinder';
+import { findBestPath, calculateMultiHopPriceImpact } from '../utils/pathFinder';
 import { SwapPriceDistribution } from './SwapPriceDistribution';
 
-// Add a utility function at the top of the file to help with gas estimation
+
 const getGasSettings = (isEstimationFailed = false) => {
   return {
-    gasLimit: isEstimationFailed ? 1000000 : 500000, // Increased gas limits
+    gasLimit: isEstimationFailed ? 1000000 : 500000, 
     gasPrice: ethers.utils.parseUnits(isEstimationFailed ? "150" : "100", "gwei")
   };
 };
@@ -649,7 +648,7 @@ export const Swap: React.FC = () => {
         {tokenIn && tokenOut && pair && provider && (
           <div className="space-y-10">
             <div>
-              <h3 className="text-xl font-semibold text-white mb-4">Reserves Curve</h3>
+              <h3 className="text-xl font-semibold text-white mb-4" style={{marginTop:'20px'}}>Reserves Curve</h3>
               <div className="bg-gray-950 rounded-2xl p-6">
                 <ReservesCurve
                   token0={tokenIn}

@@ -42,8 +42,8 @@ export const Header = () => {
                 </Link>
 
                 <div className="flex gap-4">
-                  <Link to="/swap" className={getNavLinkClass('/swap')}>Swap</Link>
                   <Link to="/pool" className={getNavLinkClass('/pool')}>Pool</Link>
+                  <Link to="/swap" className={getNavLinkClass('/swap')}>Swap</Link>
                 </div>
               </div>
 

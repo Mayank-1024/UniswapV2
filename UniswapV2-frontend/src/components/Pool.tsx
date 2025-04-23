@@ -683,7 +683,7 @@ export const Pool: React.FC = () => {
                         key={percentage}
                         className={`py-1.5 text-sm rounded-lg transition-all ${
                           removalPercentage === percentage
-                            ? 'bg-primary text-white'
+                            ? 'bg-gray text-white'
                             : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                         }`}
                         onClick={() => handlePercentageSelect(percentage)}
@@ -719,7 +719,7 @@ export const Pool: React.FC = () => {
     
                 {/* You Will Receive */}
                 <div className="bg-gray-900 border border-blue-800 p-4 rounded-xl text-white mt-4">
-                  <h3 className="text-sm font-medium text-blue-400 mb-2">You Will Receive</h3>
+                  <h3 className="text-sm font-medium text-blue-400 mb-2">You Will Get</h3>
                   <div className="text-sm space-y-1">
                     <div className="flex justify-between">
                       <span>{selectedPair.token0.symbol}:</span>
@@ -730,14 +730,6 @@ export const Pool: React.FC = () => {
                       <span>{returnAmountB}</span>
                     </div>
                   </div>
-                </div>
-    
-                {/* Note */}
-                <div className="p-4 bg-gray-900 text-blue-400 rounded-xl text-xs border border-blue-800 mt-4">
-                  <p>
-                    <strong>Note:</strong> When you remove liquidity, you’ll receive both tokens
-                    from the pool proportional to your share.
-                  </p>
                 </div>
               </>
             )}

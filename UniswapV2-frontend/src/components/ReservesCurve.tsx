@@ -65,7 +65,7 @@ export const ReservesCurve: React.FC<ReservesCurveProps> = ({
           {
             label: 'x * y = k',
             data: points,
-            borderColor: '#22c55e', // Green color
+            borderColor: 'rgba(34, 197, 94, 0.9)', // green-500
             borderWidth: 2,
             fill: false,
             pointRadius: 0,
@@ -74,8 +74,8 @@ export const ReservesCurve: React.FC<ReservesCurveProps> = ({
           {
             label: 'Current Position (P)',
             data: [{ x: r0, y: r1 }],
-            backgroundColor: '#191B1F',
-            borderColor: '#191B1F',
+            backgroundColor: 'rgba(107, 114, 128, 1)', // gray-500
+            borderColor: 'rgba(229, 231, 235, 0.8)', // gray-200 border
             pointStyle: 'circle',
             pointRadius: 6,
             pointHoverRadius: 8,
@@ -98,10 +98,10 @@ export const ReservesCurve: React.FC<ReservesCurveProps> = ({
               color: '#e5e7eb',
             },
             grid: {
-              color: '#374151',
+              color: 'rgba(75, 85, 99, 0.3)', // soft gray-600
             },
             ticks: {
-              color: '#9ca3af',
+              color: '#9ca3af', // gray-400
             }
           },
           y: {
@@ -112,7 +112,7 @@ export const ReservesCurve: React.FC<ReservesCurveProps> = ({
               color: '#e5e7eb',
             },
             grid: {
-              color: '#374151',
+              color: 'rgba(75, 85, 99, 0.3)',
             },
             ticks: {
               color: '#9ca3af',
@@ -135,28 +135,30 @@ export const ReservesCurve: React.FC<ReservesCurveProps> = ({
                 return `${token0.symbol}: ${point.x.toFixed(6)}, ${token1.symbol}: ${point.y.toFixed(6)}`;
               },
             },
-            backgroundColor: '#1f2937',
-            titleColor: '#e5e7eb',
-            bodyColor: '#e5e7eb',
-            borderColor: '#374151',
+            backgroundColor: '#1f2937', // dark tooltip
+            titleColor: '#f9fafb',
+            bodyColor: '#d1d5db',
+            borderColor: '#4b5563',
             borderWidth: 1,
           },
           legend: {
             labels: {
-              color: '#e5e7eb',
+              color: '#d1d5db',
             }
           },
           title: {
             display: true,
             text: 'Constant Product AMM Curve',
-            color: '#e5e7eb',
+            color: '#f3f4f6',
             font: {
               size: 16,
+              weight: 'bold',
             }
           }
         },
       },
     });
+
 
     return () => {
       if (chartInstance.current) {

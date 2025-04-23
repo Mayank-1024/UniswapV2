@@ -76,6 +76,10 @@ export const SwapPriceDistribution: React.FC<SwapPriceDistributionProps> = ({
     }
 
     // Create new chart
+    const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+    gradient.addColorStop(0, 'rgba(107, 114, 128, 0.8)'); // gray-500 @ top
+    gradient.addColorStop(1, 'rgba(55, 65, 81, 0.8)');    // gray-700 @ bottom
+
     chartInstance.current = new ChartJS(ctx, {
       type: 'bar',
       data: {
@@ -83,9 +87,11 @@ export const SwapPriceDistribution: React.FC<SwapPriceDistributionProps> = ({
         datasets: [{
           label: 'Swap Count',
           data: chartData.data,
-          backgroundColor: '#ec4899',
-          borderColor: '#be185d',
+          backgroundColor: gradient,
+          borderColor: 'rgba(229, 231, 235, 0.6)', // gray-200
           borderWidth: 1,
+          hoverBackgroundColor: 'rgba(107, 114, 128, 1)',  // brighter on hover
+          hoverBorderColor: 'rgba(255, 255, 255, 0.8)',
         }]
       },
       options: {
@@ -96,13 +102,13 @@ export const SwapPriceDistribution: React.FC<SwapPriceDistributionProps> = ({
             title: {
               display: true,
               text: `Price (${token1.symbol}/${token0.symbol})`,
-              color: '#e5e7eb',
+              color: '#e5e7eb', // gray-200
             },
             grid: {
-              color: '#374151',
+              color: 'rgba(75, 85, 99, 0.3)', // gray-600 faint grid
             },
             ticks: {
-              color: '#9ca3af',
+              color: '#9ca3af', // gray-400
             }
           },
           y: {
@@ -112,7 +118,7 @@ export const SwapPriceDistribution: React.FC<SwapPriceDistributionProps> = ({
               color: '#e5e7eb',
             },
             grid: {
-              color: '#374151',
+              color: 'rgba(75, 85, 99, 0.3)',
             },
             ticks: {
               color: '#9ca3af',
@@ -123,26 +129,28 @@ export const SwapPriceDistribution: React.FC<SwapPriceDistributionProps> = ({
           title: {
             display: true,
             text: 'Swap Price Distribution',
-            color: '#e5e7eb',
+            color: '#f3f4f6',
             font: {
               size: 16,
+              weight: 'bold'
             }
           },
           legend: {
             labels: {
-              color: '#e5e7eb',
+              color: '#d1d5db',
             }
           },
           tooltip: {
-            backgroundColor: '#1f2937',
-            titleColor: '#e5e7eb',
-            bodyColor: '#e5e7eb',
-            borderColor: '#374151',
+            backgroundColor: '#1f2937', // gray-800
+            titleColor: '#f9fafb',
+            bodyColor: '#d1d5db',
+            borderColor: '#4b5563', // gray-600
             borderWidth: 1,
           }
         },
       }
     });
+
   };
 
   // Handle resize
