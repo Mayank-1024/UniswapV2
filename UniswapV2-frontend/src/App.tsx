@@ -1,5 +1,5 @@
 // import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { Web3Provider } from './context/Web3Context'
 import { Header } from './components/Header'
 import { Swap } from './components/Swap'
@@ -19,8 +19,6 @@ function App() {
               <Routes>
                 <Route path="/" element={<Swap />} />
                 <Route path="/pool" element={<Pool />} />
-                {/* <Route path="/nl" element={<NaturalLanguage />} /> */}
-                {/* <Route path="/nl/test" element={<TestEvaluation/>} /> */}
                 <Route path="/swap" element={<Swap />} />
               </Routes>
             </main>
