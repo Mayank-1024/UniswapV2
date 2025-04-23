@@ -18,8 +18,8 @@ function App() {
             <main className="container mx-auto py-6 px-4 min-h-[calc(100vh-180px)]">
               <Routes>
                 <Route path="/" element={<Swap />} />
-                <Route path="/pool" element={<Pool />} />
                 <Route path="/swap" element={<Swap />} />
+                <Route path="/pool" element={<Pool />} />
               </Routes>
             </main>
             
