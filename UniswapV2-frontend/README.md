@@ -2,7 +2,7 @@
 
 <div align="center">
   
-    [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF.svg)](https://vitejs.dev/)
+   [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF.svg)](https://vitejs.dev/)
     [![React](https://img.shields.io/badge/React-18.x-blue.svg)](https://reactjs.org/)
     [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
     [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
