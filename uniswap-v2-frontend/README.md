@@ -1,4 +1,4 @@
-# 🦄 Uniswap V2  with AI Integration
+# 🦄 Uniswap V2 UI 
 
 <div align="center">
   
@@ -15,7 +15,6 @@
 
 ## 🎨 Features
 
-- 🧙‍♂️ **Conversational Trading Interface**: Interact with the platform using everyday language to execute transactions and manage your positions
 - 📈 **Comprehensive Market Insights**: Visualize and monitor key performance indicators across all pools and trading pairs
 - 🌊 **Complete Liquidity Controls**: Seamlessly contribute to and withdraw from liquidity pools with instant statistical feedback
 - 🔮 **Streamlined Blockchain Connectivity**: Effortless digital wallet integration and simplified transaction handling
@@ -49,10 +48,7 @@
 3. **Set up environment variables**
    Edit `.env` with your configuration:
    ```env
-  
-   VITE_OPENAI_API_KEY=your_openai_key
-  
-   ```
+     ```
 
 4. **Start the development server**
    ```terminal
@@ -70,15 +66,12 @@
 uniswap-v2-frontend/
 ├── src/
 │   ├── components/         
-│   ├── context/            
-│   ├── hooks/              
-│   ├── pages/              
+│   ├── constants/            
+│   ├── context/              
+│   ├── hooks           
 │   ├── services/           
 │   ├── styles/             
-│   └── utils/              
-├── public/                 
-├── tests/                  
-└── config/                 
+│   └── utils/                             
 ```
 
 ## References
