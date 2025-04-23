@@ -1,12 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ethers } from 'ethers';
-import { RPC_URL } from '../constants/addresses';
 import { ERC20_ABI, FACTORY_ABI, PAIR_ABI, ROUTER_ABI } from '../constants/abis';
 import { FACTORY_ADDRESS, ROUTER_ADDRESS } from '../constants/addresses';
 
 // Tenderly mainnet fork configuration
 const TENDERLY_CHAIN_ID = 1; // Mainnet chain ID
 const NETWORK_NAME = 'Tenderly Mainnet Fork';
+const RPC_URL = import.meta.env.VITE_RPC_URL;
 
 export interface Web3Context {
   provider: ethers.providers.Web3Provider | null;
@@ -26,7 +26,7 @@ export interface Web3Context {
 
 export function useWeb3(): Web3Context {
   const [provider, setProvider] = useState<ethers.providers.Web3Provider | null>(null);
-  const [tenderlyProvider, setTenderlyProvider] = useState<ethers.providers.JsonRpcProvider | null>(null);
+  const tenderlyProvider = new ethers.providers.JsonRpcProvider(import.meta.env.VITE_RPC_URL);
   const [signer, setSigner] = useState<ethers.Signer | null>(null);
   const [account, setAccount] = useState<string | null>(null);
   const [chainId, setChainId] = useState<number | null>(null);
@@ -38,14 +38,14 @@ export function useWeb3(): Web3Context {
   const isCorrectNetwork = chainId === TENDERLY_CHAIN_ID;
 
   // Initialize Tenderly provider
-  useEffect(() => {
-    try {
-      const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
-      setTenderlyProvider(provider);
-    } catch (error) {
-      console.error("Failed to initialize Tenderly provider:", error);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     const provider = new ethers.providers.JsonRpcProvider(RPC_URL);
+  //     // setTenderlyProvider(provider);
+  //   } catch (error) {
+  //     console.error("Failed to initialize Tenderly provider:", error);
+  //   }
+  // }, []);
 
   const setupContracts = useCallback((walletSigner: ethers.Signer) => {
     try {

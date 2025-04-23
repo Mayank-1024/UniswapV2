@@ -615,26 +615,27 @@ export const Pool: React.FC = () => {
     };
     
     return (
-      <div className="p-6 bg-darker rounded-lg shadow">
-        <h2 className="text-xl font-semibold mb-4 text-white">Remove Liquidity</h2>
-        
+      <div className="p-6 bg-dark border border-gray-800 rounded-2xl shadow-xl space-y-6">
+        <h2 className="text-2xl font-semibold text-white mb-4">Remove Liquidity</h2>
+    
         {!isConnected ? (
-          <div className="text-center p-4 bg-dark rounded">
+          <div className="text-center p-4 bg-gray-900 rounded-xl border border-gray-800">
             <p className="text-gray-400">Please connect your wallet to remove liquidity.</p>
           </div>
         ) : userPairs.length === 0 ? (
-          <div className="text-center p-4 bg-dark rounded">
+          <div className="text-center p-4 bg-gray-900 rounded-xl border border-gray-800">
             <p className="mb-2 text-gray-300">You haven't added liquidity to any pools yet.</p>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-500">
               Switch to the "Add" tab to create a new liquidity position.
             </p>
           </div>
         ) : (
           <>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-300 mb-1">Select Pool</label>
+            {/* Pool Selector */}
+            <div>
+              <label className="block text-sm font-medium text-gray-300 mb-2">Select Pool</label>
               <select
-                className="w-full p-2 border rounded bg-dark text-white border-gray-700"
+                className="w-full px-3 py-2 bg-gray-900 text-white border border-gray-700 rounded-xl focus:outline-none"
                 value={selectedPair ? selectedPair.address : ''}
                 onChange={(e) => {
                   const pair = userPairs.find(p => p.address === e.target.value) || null;
@@ -642,20 +643,21 @@ export const Pool: React.FC = () => {
                 }}
               >
                 <option value="">Select a pool</option>
-                {userPairs.map((pair) => (
+                {userPairs.map(pair => (
                   <option key={pair.address} value={pair.address}>
                     {pair.token0.symbol} / {pair.token1.symbol}
                   </option>
                 ))}
               </select>
             </div>
-            
+    
+            {/* Pool Info */}
             {selectedPair && (
               <>
-                <div className="p-3 mb-4 bg-dark rounded border border-gray-700">
-                  <h3 className="font-medium mb-1 text-gray-300">Pool Information</h3>
-                  <div className="text-sm text-gray-400">
-                    <div className="flex justify-between mb-1">
+                <div className="p-4 bg-gray-900 border border-gray-700 rounded-xl">
+                  <h3 className="text-sm font-medium text-gray-300 mb-2">Pool Reserves</h3>
+                  <div className="text-sm text-gray-400 space-y-1">
+                    <div className="flex justify-between">
                       <span>{selectedPair.token0.symbol}:</span>
                       <span>{formatAmount(selectedPair.reserves.reserve0.toString(), selectedPair.token0.decimals)}</span>
                     </div>
@@ -665,24 +667,24 @@ export const Pool: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                
-                <div className="mb-1">
-                  <div className="flex justify-between text-sm text-gray-300">
-                    <span>Your LP Token Balance:</span> 
-                    <span>{lpTokenBalance}</span>
-                  </div>
+    
+                {/* LP Balance */}
+                <div className="text-sm text-gray-300 flex justify-between mt-2">
+                  <span>Your LP Token Balance:</span>
+                  <span>{lpTokenBalance}</span>
                 </div>
-                
-                <div className="mb-1">
-                  <label className="block text-sm font-medium text-gray-300 mb-1">How much to remove?</label>
-                  <div className="grid grid-cols-4 gap-2 mb-2">
-                    {[25, 50, 75, 100].map((percentage) => (
+    
+                {/* Removal % Buttons */}
+                <div className="mt-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">How much to remove?</label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {[25, 50, 75, 100].map(percentage => (
                       <button
                         key={percentage}
-                        className={`py-1 px-2 rounded text-sm ${
-                          removalPercentage === percentage 
-                            ? 'bg-primary text-white' 
-                            : 'bg-dark text-gray-400 hover:bg-opacity-80'
+                        className={`py-1.5 text-sm rounded-lg transition-all ${
+                          removalPercentage === percentage
+                            ? 'bg-primary text-white'
+                            : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
                         }`}
                         onClick={() => handlePercentageSelect(percentage)}
                       >
@@ -691,17 +693,18 @@ export const Pool: React.FC = () => {
                     ))}
                   </div>
                 </div>
-                
-                <div className="mb-4">
+    
+                {/* Amount Input */}
+                <div className="mt-4">
                   <label className="block text-sm font-medium text-gray-300 mb-1">Amount of LP Tokens to Burn</label>
                   <input
                     type="number"
                     value={liquidity}
                     onChange={(e) => {
                       setLiquidity(e.target.value);
-                      // Calculate percentage for the UI
                       if (parseFloat(lpTokenBalance) > 0 && parseFloat(e.target.value) > 0) {
-                        const newPercentage = Math.min(100, 
+                        const newPercentage = Math.min(
+                          100,
                           Math.round((parseFloat(e.target.value) / parseFloat(lpTokenBalance)) * 100)
                         );
                         setRemovalPercentage(newPercentage);
@@ -710,14 +713,15 @@ export const Pool: React.FC = () => {
                       }
                     }}
                     placeholder="0.0"
-                    className="w-full p-2 border rounded bg-dark text-white border-gray-700"
+                    className="w-full px-3 py-2 bg-gray-900 text-white border border-gray-700 rounded-xl focus:outline-none"
                   />
                 </div>
-                
-                <div className="p-3 mb-4 bg-dark rounded border border-blue-800">
-                  <h3 className="font-medium mb-1 text-blue-400">You Will Receive</h3>
-                  <div className="text-sm text-white">
-                    <div className="flex justify-between mb-1">
+    
+                {/* You Will Receive */}
+                <div className="bg-gray-900 border border-blue-800 p-4 rounded-xl text-white mt-4">
+                  <h3 className="text-sm font-medium text-blue-400 mb-2">You Will Receive</h3>
+                  <div className="text-sm space-y-1">
+                    <div className="flex justify-between">
                       <span>{selectedPair.token0.symbol}:</span>
                       <span>{returnAmountA}</span>
                     </div>
@@ -727,20 +731,22 @@ export const Pool: React.FC = () => {
                     </div>
                   </div>
                 </div>
-                
-                <div className="p-3 mb-4 bg-dark text-blue-400 rounded-md text-sm border border-blue-800">
+    
+                {/* Note */}
+                <div className="p-4 bg-gray-900 text-blue-400 rounded-xl text-xs border border-blue-800 mt-4">
                   <p>
-                    <strong>Note:</strong> When you remove liquidity, you'll receive both tokens from 
-                    the pool proportional to your share. Make sure you are ready to receive these assets.
+                    <strong>Note:</strong> When you remove liquidity, you’ll receive both tokens
+                    from the pool proportional to your share.
                   </p>
                 </div>
               </>
             )}
-            
+    
+            {/* Remove Button */}
             <button
               onClick={handleRemoveLiquidity}
               disabled={!selectedPair || !liquidity || parseFloat(liquidity) <= 0 || isProcessing}
-              className={`w-full py-2 rounded font-medium ${
+              className={`w-full mt-4 py-3 rounded-xl font-semibold transition-all duration-200 ${
                 !selectedPair || !liquidity || parseFloat(liquidity) <= 0 || isProcessing
                   ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
                   : 'bg-red-600 text-white hover:bg-red-700'
@@ -757,10 +763,10 @@ export const Pool: React.FC = () => {
   // Add the renderAddLiquidity function back
   const renderAddLiquidity = () => {
     return (
-      <div className="space-y-4">
+      <div className="space-y-6">
         {/* Token A Input */}
         <div className="relative">
-          <div className="bg-gray-900/50 rounded-xl p-4">
+          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
             <div className="flex justify-between mb-2">
               <label className="text-sm text-gray-400">Token A</label>
               {tokenA && (
@@ -774,10 +780,10 @@ export const Pool: React.FC = () => {
                 type="number"
                 value={amountA}
                 onChange={(e) => setAmountA(e.target.value)}
-                className="w-full bg-transparent text-2xl font-medium focus:outline-none text-white"
+                className="w-full bg-transparent text-2xl font-semibold text-white focus:outline-none"
                 placeholder="0.0"
               />
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors min-w-[140px]">
+              <div className="flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded-xl min-w-[140px] transition-all">
                 <TokenSelector
                   selectedToken={tokenA}
                   onSelectToken={setTokenA}
@@ -786,16 +792,11 @@ export const Pool: React.FC = () => {
               </div>
             </div>
           </div>
-
-          {/* Plus Icon */}
-          <div className="absolute left-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-            <div className="w-8 h-8 rounded-full bg-gray-800 border border-gray-700 flex items-center justify-center">
-              <BsPlusCircleFill className="w-5 h-5 text-pink-500" />
-            </div>
-          </div>
-
+  
+        
+  
           {/* Token B Input */}
-          <div className="bg-gray-900/50 rounded-xl p-4 mt-2">
+          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4 mt-2">
             <div className="flex justify-between mb-2">
               <label className="text-sm text-gray-400">Token B</label>
               {tokenB && (
@@ -809,10 +810,10 @@ export const Pool: React.FC = () => {
                 type="number"
                 value={amountB}
                 onChange={(e) => setAmountB(e.target.value)}
-                className="w-full bg-transparent text-2xl font-medium focus:outline-none text-white"
+                className="w-full bg-transparent text-2xl font-semibold text-white focus:outline-none"
                 placeholder="0.0"
               />
-              <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-800 hover:bg-gray-700 transition-colors min-w-[140px]">
+              <div className="flex items-center gap-2 px-3 py-2 bg-gray-800 hover:bg-gray-700 rounded-xl min-w-[140px] transition-all">
                 <TokenSelector
                   selectedToken={tokenB}
                   onSelectToken={setTokenB}
@@ -822,62 +823,59 @@ export const Pool: React.FC = () => {
             </div>
           </div>
         </div>
-
+  
         {/* Pool Information */}
         {pair && (
-          <div className="bg-gray-900/50 rounded-xl p-4">
-            <h3 className="text-xl font-medium mb-4">Pool Information</h3>
-            <div className="space-y-3">
-             
-          
-              <div className="flex justify-between items-center">
-                <span className="text-gray-400">Token A: {pair.token0.symbol}</span>
-                <span className="text-white">{formatAmount(pair.reserves.reserve0.toString(), pair.token0.decimals)}</span>
+          <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4">
+            <h3 className="text-lg font-semibold mb-3 text-white">Pool Information</h3>
+            <div className="space-y-2 text-sm text-gray-300">
+              <div className="flex justify-between">
+                <span>Token A: {pair.token0.symbol}</span>
+                <span>{formatAmount(pair.reserves.reserve0.toString(), pair.token0.decimals)}</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-gray-400">Token B: {pair.token1.symbol}</span>
-                <span className="text-white">{formatAmount(pair.reserves.reserve1.toString(), pair.token1.decimals)}</span>
+              <div className="flex justify-between">
+                <span>Token B: {pair.token1.symbol}</span>
+                <span>{formatAmount(pair.reserves.reserve1.toString(), pair.token1.decimals)}</span>
               </div>
             </div>
           </div>
         )}
-
+  
+        {/* Add Button */}
         <button
           onClick={handleAddLiquidity}
           disabled={!tokenA || !tokenB || !amountA || !amountB || isProcessing || !isConnected}
-          className="w-full bg-gradient-to-r from-pink-500 to-purple-500 text-white py-4 rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:from-pink-600 hover:to-purple-600 transition-all"
+          className="w-full py-4 rounded-xl font-semibold transition-all duration-200
+          bg-gray-800 text-white
+          disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-700"
         >
-          {!isConnected 
-            ? 'Connect Wallet' 
-            : isProcessing 
-              ? 'Processing...' 
-              : 'Add Liquidity'
-          }
+          {!isConnected
+            ? 'Connect Wallet'
+            : isProcessing
+              ? 'Processing...'
+              : 'Add Liquidity'}
         </button>
       </div>
     );
-  };
+  };  
 
   return (
     <div className="max-w-2xl mx-auto">
-      <div className="bg-gray-800/50 backdrop-blur-sm border border-gray-700 rounded-2xl p-6 shadow-xl">
+      <div className="glass-effect border border-gray-700 rounded-2xl p-6 shadow-xl">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent flex items-center gap-2">
-            <BiWater className="w-6 h-6" />
+          <h2 className="text-2xl font-bold text-white flex items-center gap-2">
+            <BiWater className="w-6 h-6 text-gray-400" />
             Pool
           </h2>
-          <button className="p-2 rounded-xl hover:bg-gray-700/50 transition-colors">
-            <BsGearFill className="w-5 h-5 text-gray-400 hover:text-white" />
-          </button>
         </div>
-
+  
         {/* Tab Navigation */}
-        <div className="flex gap-2 p-1 bg-gray-900/50 rounded-xl mb-6">
+        <div className="flex gap-2 p-1 bg-dark rounded-xl mb-6">
           <button
             onClick={() => setActiveTab('add')}
             className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-all ${
               activeTab === 'add'
-                ? 'bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-lg'
+                ? 'bg-gray-700 text-white shadow-lg'
                 : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
             }`}
           >
@@ -888,7 +886,7 @@ export const Pool: React.FC = () => {
             onClick={() => setActiveTab('remove')}
             className={`flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg font-medium transition-all ${
               activeTab === 'remove'
-                ? 'bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-lg'
+                ? 'bg-gray-700 text-white shadow-lg'
                 : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
             }`}
           >
@@ -896,16 +894,16 @@ export const Pool: React.FC = () => {
             Remove
           </button>
         </div>
-
+  
         {/* Add Liquidity Form */}
         {activeTab === 'add' ? renderAddLiquidity() : renderRemoveLiquidity()}
       </div>
-
+  
       {/* Add the PairsList component */}
       <div className="w-full max-w-3xl mx-auto">
         <PairsList />
       </div>
-
+  
       {/* Add reserves curve if we have a pool */}
       {selectedPair && tokenA && tokenB && pair && (
         <div className="mt-8">
@@ -924,4 +922,5 @@ export const Pool: React.FC = () => {
       )}
     </div>
   );
+  
 }; 

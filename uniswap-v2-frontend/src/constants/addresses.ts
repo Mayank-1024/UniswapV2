@@ -1,23 +1,23 @@
 import { Token } from '../utils/tokens';
 
 // Tenderly Mainnet Fork addresses
-export const FACTORY_ADDRESS = '0xc5c136E3c8c31bfeeA9417A616f34D657Fc2A3F4';
-export const ROUTER_ADDRESS = '0xDf1763717e66ab839B69A6909dC45A30d7756054';
+export const FACTORY_ADDRESS = '0x7695808A24A45E78651667950e00cBef95E8B661';
+export const ROUTER_ADDRESS = '0x370123a86Cb5d90dc70e6D060129a6CDaF2d3c6a';
 export const WETH_ADDRESS = '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2';
 
 // Tenderly Mainnet RPC URL
-export const RPC_URL = 'https://virtual.mainnet.rpc.tenderly.co/cec2fc9b-6122-43a3-bd3c-c081f32e2727';
+export const RPC_URL = 'https://virtual.mainnet.rpc.tenderly.co/f8509f2c-60c4-4512-8798-a092498ecd6e';
 
-// Test tokens to display in the UI
+// Test tokens to display in the UI 
 export const TEST_TOKENS: Token[] = [
   {
-    symbol: 'LINK',
-    name: 'Chainlink',
-    address: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
+    symbol: 'ETH',
+    name: 'Ethereum',
+    address: 'ETH',
     decimals: 18,
-    logoURI: 'https://assets.coingecko.com/coins/images/877/standard/chainlink-new-logo.png?1696502009'
+    logoURI: 'https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628'
   },
- 
+
   {
     symbol: 'WETH',
     name: 'Wrapped Ether',
@@ -26,13 +26,19 @@ export const TEST_TOKENS: Token[] = [
     logoURI: 'https://assets.coingecko.com/coins/images/2518/small/weth.png'
   },
   {
+    symbol: 'LINK',
+    name: 'Chainlink',
+    address: '0x514910771AF9Ca656af840dff83E8264EcF986CA',
+    decimals: 18,
+    logoURI: 'https://assets.coingecko.com/coins/images/877/standard/chainlink-new-logo.png?1696502009'
+  },
+  {
     symbol: 'SUSHI',
     name: 'SushiToken',
     address: '0x6B3595068778DD592e39A122f4f5a5cF09C90fE2',
     decimals: 18,
     logoURI: 'https://assets.coingecko.com/coins/images/12271/small/512x512_Logo_no_chop.png'
   },
-  // Add some popular mainnet tokens (since we're using a mainnet fork)
   {
     symbol: 'USDC',
     name: 'USD Coin',
@@ -60,12 +66,6 @@ export const TEST_TOKENS: Token[] = [
     address: '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984',
     decimals: 18,
     logoURI: 'https://assets.coingecko.com/coins/images/12504/small/uniswap-uni.png'
-  }, {
-    symbol: 'ETH',
-    name: 'Ethereum',
-    address: 'ETH',
-    decimals: 18,
-    logoURI: 'https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628'
-  },
+  }, 
 
 ]; 

@@ -17,85 +17,54 @@ export const Header = () => {
   };
 
   const getNavLinkClass = (path: string) => {
-    if (path === '/nl') {
-      return isActive(path)
-        ? 'px-5 py-3 rounded-xl font-medium text-lg relative bg-gradient-to-r from-pink-500 via-purple-500 to-pink-500 text-white animate-gradient-x shadow-lg shadow-pink-500/20 hover:shadow-pink-500/40 transition-all duration-300 border border-white/10'
-        : 'px-5 py-3 rounded-xl font-medium text-lg relative bg-gradient-to-r from-pink-500/10 via-purple-500/10 to-pink-500/10 text-pink-500 hover:bg-gradient-to-r hover:from-pink-500/20 hover:via-purple-500/20 hover:to-pink-500/20 transition-all duration-300';
-    }
-    
-    return `px-5 py-3 rounded-xl transition-all duration-200 font-medium text-lg ${
+    return `px-5 py-2 rounded-lg transition-all duration-200 font-medium text-md ${
       isActive(path)
-        ? 'bg-pink-500/10 text-pink-500'
-        : 'text-gray-400 hover:text-gray-200 hover:bg-gray-800/50'
+        ? 'bg-zinc-800 text-white shadow-md'
+        : 'text-zinc-400 hover:text-white hover:bg-zinc-700/50'
     }`;
   };
 
   return (
     <>
-      {/* Spacer div to prevent content from going under fixed header */}
       <div className="h-[100px]" />
-      
-      {/* Fixed Header Container with Margin */}
+
       <div className="fixed top-0 left-0 right-0 z-50 px-6 pt-4">
-        {/* Header with Island Effect */}
-        <header className="mx-auto max-w-7xl rounded-2xl border border-gray-800/50 backdrop-blur-xl bg-gray-900/40 shadow-[0_0_20px_10px_rgba(0,0,0,0.1)] hover:shadow-[0_0_25px_12px_rgba(0,0,0,0.12)] transition-shadow duration-300">
+        <header className="mx-auto max-w-7xl rounded-xl border border-zinc-800/50 backdrop-blur-lg bg-zinc-900/60 shadow-lg transition-shadow duration-300">
           <div className="px-8 py-4">
-            <nav className="flex items-center justify-between">
-              {/* Logo and Nav Links */}
-              <div className="flex items-center gap-14">
-                <Link to="/" className="flex items-center gap-4 group">
-                  <img 
-                    src={UNI_LOGO_URL}
-                    alt="UNI Token" 
-                    className="w-14 h-14 rounded-full shadow-lg shadow-pink-500/20 group-hover:shadow-pink-500/40 group-hover:rotate-12 transition-all duration-300"
-                  />
-                  <span className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-purple-500">
-                    Uniswap V2
+            <nav className="flex justify-center items-center gap-20 px-6 py-3 bg-dark text-white shadow-md">
+              
+              <div className="flex items-center gap-12">
+                <Link to="/" className="flex items-center gap-3 group">
+                 
+                  <span className="text-2xl font-bold text-white tracking-wide">
+                    Mayank Uniswap V2
                   </span>
                 </Link>
-                
-                <div className="flex items-center gap-3">
-                  {[
-                    { path: '/swap', label: 'Swap' },
-                    { path: '/pool', label: 'Pool' },
-                    { path: '/nl', label: 'AI Chat' },
-                    { path: '/nl/test', label: 'Test Cases' }
-                  ].map(({ path, label }) => (
-                    <Link
-                      key={path}
-                      to={path}
-                      className={getNavLinkClass(path)}
-                    >
-                      {label}
-                      {path === '/nl' && !isActive(path) && (
-                        <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
-                        </span>
-                      )}
-                    </Link>
-                  ))}
+
+                <div className="flex gap-4">
+                  <Link to="/swap" className={getNavLinkClass('/swap')}>Swap</Link>
+                  <Link to="/pool" className={getNavLinkClass('/pool')}>Pool</Link>
                 </div>
               </div>
 
-              {/* Wallet Section */}
+              {/* Wallet */}
               <div className="flex items-center gap-4">
                 {account ? (
-                  <div className="flex items-center gap-4">
-                    <div className="px-5 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-300 font-medium text-lg">
+                  <>
+                    <div className="px-4 py-2 rounded-md bg-zinc-800 text-gray-200 font-mono text-sm border border-zinc-700">
                       {formatAddress(account)}
                     </div>
                     <button
                       onClick={disconnectWallet}
-                      className="px-5 py-3 rounded-xl bg-red-500/10 text-red-500 hover:bg-red-500/20 transition-colors font-medium text-lg"
+                      className="px-4 py-2 bg-zinc-800 text-red-400 border border-red-500/40 rounded-md hover:bg-red-900/40 transition"
                     >
                       Disconnect
                     </button>
-                  </div>
+                  </>
                 ) : (
                   <button
                     onClick={connectWallet}
-                    className="px-6 py-3 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:opacity-90 transition-opacity font-medium text-lg"
+                    className="px-5 py-2 bg-zinc-700 text-white rounded-lg hover:bg-zinc-600 transition"
                   >
                     Connect Wallet
                   </button>
@@ -107,4 +76,4 @@ export const Header = () => {
       </div>
     </>
   );
-}; 
+};

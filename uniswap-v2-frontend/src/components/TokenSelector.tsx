@@ -56,108 +56,97 @@ const TokenSelector: React.FC<TokenSelectorProps> = ({
   return (
     <div className="relative">
       {label && (
-        <label className="block text-sm font-medium text-gray-300 mb-1">
+        <label className="block text-xs font-medium text-gray-400 mb-1 px-1">
           {label}
         </label>
       )}
       <button
         type="button"
-        className={`w-full flex items-center justify-between bg-dark text-white px-4 py-2 rounded-lg border border-gray-700 hover:border-gray-500 focus:outline-none ${className}`}
+        className={`w-full flex items-center justify-between px-3 py-2 rounded-xl bg-[#1A1A1A] border border-gray-700 hover:border-gray-500 text-white focus:outline-none transition-all duration-200 ${className}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {selectedToken ? (
-          <div className="flex items-center">
-            <div className="relative">
+          <div className="flex items-center gap-2">
+            <div className="relative w-7 h-7">
               <img
                 src={selectedToken.logoURI}
                 alt={selectedToken.symbol}
-                className="w-6 h-6 rounded-full mr-2"
+                className="w-7 h-7 rounded-full object-cover"
                 onError={(e) => {
                   const target = e.target as HTMLImageElement;
                   target.style.display = 'none';
                   target.nextElementSibling?.classList.remove('hidden');
                 }}
               />
-              <div className="w-6 h-6 rounded-full bg-gray-700 hidden flex items-center justify-center text-xs mr-2 absolute inset-0">
+              <div className="absolute inset-0 hidden bg-gray-700 text-white text-xs flex items-center justify-center rounded-full">
                 {selectedToken.symbol.charAt(0)}
               </div>
             </div>
-            <span>{selectedToken.symbol}</span>
+            <span className="text-sm">{selectedToken.symbol}</span>
           </div>
         ) : (
-          <span className="text-gray-400">Select a token</span>
+          <span className="text-gray-400 text-sm">Select a token</span>
         )}
-        <svg
-          className="w-4 h-4 text-gray-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M19 9l-7 7-7-7"
-          ></path>
+        <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-
+  
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="fixed inset-0 bg-black/70" onClick={() => setIsOpen(false)} />
-          <div className="relative bg-darker w-full max-w-sm mx-4 rounded-xl border border-gray-800 shadow-xl">
-            <div className="flex items-center justify-between px-3 py-2 border-b border-gray-800">
-              <h3 className="text-sm font-medium text-white">Select a token</h3>
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/70" onClick={() => setIsOpen(false)} />
+          <div className="relative w-full max-w-sm mx-4 animate-fade-in-up bg-[#111111] rounded-xl border border-gray-800 shadow-xl">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-700">
+              <h3 className="text-sm font-semibold text-white">Select a token</h3>
               <button
                 onClick={() => setIsOpen(false)}
-                className="text-gray-400 hover:text-white"
+                className="text-gray-400 hover:text-white transition"
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
-            <div className="p-2">
+            <div className="p-4">
               <input
                 type="text"
                 placeholder="Search name, symbol, or paste address"
-                className="w-full bg-dark text-white px-3 py-1.5 text-sm rounded-xl border border-gray-700 focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-xl text-sm bg-[#1E1E1E] border border-gray-700 placeholder-gray-500 text-white focus:outline-none focus:border-gray-400"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
               />
-              <div className="max-h-[240px] overflow-y-auto mt-1">
+              <div className="mt-3 max-h-60 overflow-y-auto custom-scroll">
                 {filteredTokens.map((token) => (
                   <button
                     key={token.address}
-                    className="w-full text-left px-2 py-1.5 hover:bg-dark flex items-center focus:outline-none transition-colors duration-200 rounded-lg"
+                    className="w-full flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-[#222] transition focus:outline-none"
                     onClick={() => handleTokenSelect(token)}
                   >
-                    <div className="relative">
+                    <div className="relative w-7 h-7">
                       <img
                         src={token.logoURI}
                         alt={token.symbol}
-                        className="w-6 h-6 rounded-full mr-2"
+                        className="w-7 h-7 rounded-full object-cover"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
                           target.style.display = 'none';
                           target.nextElementSibling?.classList.remove('hidden');
                         }}
                       />
-                      <div className="w-6 h-6 rounded-full bg-gray-700 hidden flex items-center justify-center text-xs mr-2 absolute inset-0">
+                      <div className="absolute inset-0 hidden bg-gray-700 text-white text-xs flex items-center justify-center rounded-full">
                         {token.symbol.charAt(0)}
                       </div>
                     </div>
-                    <div className="flex flex-col">
-                      <div className="font-medium text-sm text-white leading-none">{token.symbol}</div>
-                      <div className="text-xs text-gray-400 mt-0.5">{token.name}</div>
+                    <div className="flex flex-col text-left">
+                      <span className="flex items-center px-3 py-1.5 hover:bg-dark rounded-md transition">{token.symbol}</span>
+                      <span className="text-xs text-gray-400">{token.name}</span>
                     </div>
                   </button>
                 ))}
                 {filteredTokens.length === 0 && (
-                  <div className="px-2 py-1.5 text-gray-400 text-center text-xs">
-                    No tokens found for "{searchQuery}"
+                  <div className="text-center text-gray-500 text-xs py-3">
+                    No results for "{searchQuery}"
                   </div>
                 )}
               </div>
@@ -166,7 +155,7 @@ const TokenSelector: React.FC<TokenSelectorProps> = ({
         </div>
       )}
     </div>
-  );
+  );  
 };
 
 export default TokenSelector;

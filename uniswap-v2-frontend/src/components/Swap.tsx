@@ -515,195 +515,164 @@ export const Swap: React.FC = () => {
   const [pathAmounts, setPathAmounts] = useState<string[]>([]);
 
   return (
-    <div className="space-y-4">
-      <div className="glass-effect rounded-2xl shadow-xl p-6 w-full max-w-md mx-auto">
-        <div className="flex justify-between items-center mb-6">
-          <h3 className="text-2xl font-bold gradient-text">Swap</h3>
-          <button className="p-2 rounded-xl hover:bg-gray-800/50 transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-gray-400 hover:text-white" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clipRule="evenodd" />
-            </svg>
-          </button>
+    <div className="space-y-10 px-6 pt-6 max-w-4xl mx-auto">
+      <div className="rounded-2xl border border-gray-800 bg-black shadow-md p-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-3xl font-semibold text-white">Swap Tokens</h2>
         </div>
-        
-        {/* Input amount */}
-        <div className="bg-gray-900/30 backdrop-blur-md rounded-xl p-4 mb-2 z-10">
-          <div className="flex justify-between mb-2">
-            <div className="text-sm text-gray-400">You pay</div>
-            {tokenIn && (
-              <div className="text-sm text-gray-400">
-                Balance: {formatAmount(balanceIn.toString(), tokenIn.decimals)}
-              </div>
-            )}
-          </div>
-          <div className="flex items-center gap-3">
-            <input
-              type="text"
-              className="bg-transparent text-2xl font-medium focus:outline-none w-full text-white"
-              placeholder="0.0"
-              value={inputAmount}
-              onChange={(e) => handleInputChange(e.target.value)}
-            />
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-800/50 hover:bg-gray-800 transition-colors min-w-[140px]">
-              <TokenSelector
-                selectedToken={tokenIn}
-                onSelectToken={setTokenIn}
-                otherSelectedToken={tokenOut}
-                label="You pay"
+  
+        <div className="space-y-4">
+          {/* Input */}
+          <div className="bg-gray-950 p-4 rounded-xl">
+            <div className="flex justify-between text-sm text-gray-400 mb-2">
+              <span>You pay</span>
+              {tokenIn && <span>Balance: {formatAmount(balanceIn.toString(), tokenIn.decimals)}</span>}
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                type="text"
+                className="bg-transparent text-white text-xl flex-1 focus:outline-none"
+                placeholder="0.0"
+                value={inputAmount}
+                onChange={(e) => handleInputChange(e.target.value)}
               />
+              <div className="bg-gray-800 rounded-xl px-3 py-2">
+                <TokenSelector
+                  selectedToken={tokenIn}
+                  onSelectToken={setTokenIn}
+                  otherSelectedToken={tokenOut}
+                  label="You pay"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        
-        {/* Swap direction button */}
-        <div className="flex justify-center -my-3 z-10 relative">
-          <button
-            className="bg-gray-900/50 backdrop-blur-md rounded-full p-2 border border-gray-700/50 hover:border-pink-500/50 transition-all duration-200 hover:shadow-lg hover:shadow-pink-500/20"
-            onClick={switchTokens}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-pink-500" viewBox="0 0 20 20" fill="currentColor">
-              <path d="M5 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L5 6.414V12zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" />
-            </svg>
-          </button>
-        </div>
-        
-        {/* Output amount */}
-        <div className="bg-gray-900/30 backdrop-blur-md rounded-xl p-4 mb-4">
-          <div className="flex justify-between mb-2">
-            <div className="text-sm text-gray-400">You receive</div>
-            {tokenOut && (
-              <div className="text-sm text-gray-400">
-                Balance: {formatAmount(balanceOut.toString(), tokenOut.decimals)}
-              </div>
-            )}
+  
+          {/* Switch Button */}
+          <div className="flex justify-center">
+            <button
+              className="bg-gray-900 p-2 rounded-full border border-gray-700 hover:border-white hover:scale-110 transition-transform"
+              onClick={switchTokens}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M5 12a1 1 0 102 0V6.414l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L5 6.414V12zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z" />
+              </svg>
+            </button>
           </div>
-          <div className="flex items-center gap-3">
-            <input
-              type="text"
-              className="bg-transparent text-2xl font-medium focus:outline-none w-full text-white"
-              placeholder="0.0"
-              value={outputAmount}
-              onChange={(e) => handleOutputChange(e.target.value)}
-            />
-            <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-gray-800/50 hover:bg-gray-800 transition-colors min-w-[140px]">
-              <TokenSelector
-                selectedToken={tokenOut}
-                onSelectToken={setTokenOut}
-                otherSelectedToken={tokenIn}
-                label="You receive"
+  
+          {/* Output */}
+          <div className="bg-gray-950 p-4 rounded-xl">
+            <div className="flex justify-between text-sm text-gray-400 mb-2">
+              <span>You receive</span>
+              {tokenOut && <span>Balance: {formatAmount(balanceOut.toString(), tokenOut.decimals)}</span>}
+            </div>
+            <div className="flex items-center gap-3">
+              <input
+                type="text"
+                className="bg-transparent text-white text-xl flex-1 focus:outline-none"
+                placeholder="0.0"
+                value={outputAmount}
+                onChange={(e) => handleOutputChange(e.target.value)}
               />
+              <div className="bg-gray-800 rounded-xl px-3 py-2">
+                <TokenSelector
+                  selectedToken={tokenOut}
+                  onSelectToken={setTokenOut}
+                  otherSelectedToken={tokenIn}
+                  label="You receive"
+                />
+              </div>
             </div>
           </div>
-        </div>
-        
-        {/* Route information */}
-        {currentPath.length > 0 && (
-          <div className="bg-gray-900/30 backdrop-blur-md rounded-xl p-3 mb-4">
-            <SwapRoute path={currentPath} amounts={pathAmounts} />
-          </div>
-        )}
-        
-        {/* Price information */}
-        {tokenIn && tokenOut && inputAmount && outputAmount && (
-          <div className="bg-gray-900/30 backdrop-blur-md rounded-xl p-4 mb-4 text-sm space-y-2">
-            <div className="flex justify-between items-center">
-              <div className="text-gray-400">Rate</div>
-              <div className="text-white font-medium">
-                {(() => {
-                  const isEthIn = tokenIn.address === "ETH";
-                  const isEthOut = tokenOut.address === "ETH";
-                  
-                  if (isEthIn && tokenOut.address === WETH_ADDRESS) {
-                    return '1 ETH = 1 WETH';
-                  } else if (isEthOut && tokenIn.address === WETH_ADDRESS) {
-                    return '1 WETH = 1 ETH';
-                  } else {
+  
+          {/* Route Display */}
+          {currentPath.length > 0 && (
+            <div className="bg-gray-900 p-3 rounded-xl">
+              <SwapRoute path={currentPath} amounts={pathAmounts} />
+            </div>
+          )}
+  
+          {/* Price Info */}
+          {tokenIn && tokenOut && inputAmount && outputAmount && (
+            <div className="bg-gray-900 p-4 rounded-xl text-sm text-gray-300 space-y-2">
+              <div className="flex justify-between">
+                <span>Rate</span>
+                <span className="text-white font-medium">
+                  {(() => {
+                    const isEthIn = tokenIn.address === "ETH";
+                    const isEthOut = tokenOut.address === "ETH";
+                    if (isEthIn && tokenOut.address === WETH_ADDRESS) return '1 ETH = 1 WETH';
+                    if (isEthOut && tokenIn.address === WETH_ADDRESS) return '1 WETH = 1 ETH';
                     const amountInBN = parseAmount(inputAmount, tokenIn.decimals);
                     const amountOutBN = parseAmount(outputAmount, tokenOut.decimals);
-                    
                     if (amountInBN && amountOutBN && !amountInBN.isZero()) {
                       const scaleFactor = ethers.BigNumber.from(10).pow(18);
                       const price = amountOutBN.mul(scaleFactor).div(amountInBN);
-                      const priceFormatted = formatAmount(price.toString(), 18);
-                      return `1 ${tokenIn.symbol} = ${priceFormatted} ${tokenOut.symbol}`;
-                    } else {
-                      return `1 ${tokenIn.symbol} = 0.00 ${tokenOut.symbol}`;
+                      return `1 ${tokenIn.symbol} = ${formatAmount(price.toString(), 18)} ${tokenOut.symbol}`;
                     }
-                  }
-                })()}
+                    return `1 ${tokenIn.symbol} = 0.00 ${tokenOut.symbol}`;
+                  })()}
+                </span>
+              </div>
+              {priceImpact !== null && (() => {
+                const isEthIn = tokenIn.address === "ETH";
+                const isEthOut = tokenOut.address === "ETH";
+                return !(isEthIn && tokenOut.address === WETH_ADDRESS) && !(isEthOut && tokenIn.address === WETH_ADDRESS);
+              })() && (
+                <div className="flex justify-between">
+                  <span>Price Impact</span>
+                  <span className={`font-semibold ${priceImpact > 5 ? 'text-red-500' : priceImpact > 1 ? 'text-yellow-500' : 'text-green-500'}`}>
+                    {priceImpact.toFixed(2)}%
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
+  
+          {/* Submit Button */}
+          <button
+            className={`w-full py-4 mt-4 rounded-xl font-medium transition-all duration-300 text-white text-lg ${
+              !isConnected || !tokenIn || !tokenOut || !inputAmount || !outputAmount
+                ? 'bg-gray-700 cursor-not-allowed'
+                : swapStatus === 'success'
+                  ? 'bg-green-600 hover:bg-green-700'
+                  : swapStatus === 'retrying'
+                    ? 'bg-yellow-600 hover:bg-yellow-700'
+                    : 'bg-gray-800 hover:bg-gray-700'
+            }`}
+            disabled={!isConnected || !tokenIn || !tokenOut || !inputAmount || !outputAmount || isApproving || isSwapping}
+            onClick={isConnected ? handleSwap : () => {}}
+          >
+            {getButtonText()}
+          </button>
+        </div>
+  
+        {tokenIn && tokenOut && pair && provider && (
+          <div className="space-y-10">
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-4">Reserves Curve</h3>
+              <div className="bg-gray-950 rounded-2xl p-6">
+                <ReservesCurve
+                  token0={tokenIn}
+                  token1={tokenOut}
+                  reserve0={pair.reserves.reserve0}
+                  reserve1={pair.reserves.reserve1}
+                />
               </div>
             </div>
-            
-            {/* Only show price impact if this is not a direct ETH-WETH swap */}
-            {priceImpact !== null && (() => {
-              const isEthIn = tokenIn.address === "ETH";
-              const isEthOut = tokenOut.address === "ETH";
-              
-              return !(isEthIn && tokenOut.address === WETH_ADDRESS) && 
-                     !(isEthOut && tokenIn.address === WETH_ADDRESS);
-            })() && (
-              <div className="flex justify-between items-center">
-                <div className="text-gray-400">Price Impact</div>
-                <div className={`font-medium ${
-                  priceImpact > 5 
-                    ? 'text-red-500' 
-                    : priceImpact > 1 
-                      ? 'text-yellow-500' 
-                      : 'text-green-500'
-                }`}>
-                  {priceImpact.toFixed(2)}%
-                </div>
+            <div>
+              <h3 className="text-xl font-semibold text-white mb-4">Historical Swap Prices</h3>
+              <div className="bg-gray-950 rounded-2xl p-6">
+                <SwapPriceDistribution
+                  token0={tokenIn}
+                  token1={tokenOut}
+                  pairAddress={pair.address}
+                  provider={provider}
+                />
               </div>
-            )}
+            </div>
           </div>
         )}
-        
-        {/* Action button */}
-        <button
-          className={`w-full py-4 px-6 rounded-xl font-semibold transition-all duration-200 ${
-            !isConnected || !tokenIn || !tokenOut || !inputAmount || !outputAmount
-              ? 'bg-gray-700/50 text-gray-400 cursor-not-allowed'
-              : swapStatus === 'success'
-                ? 'bg-green-500/80 text-white hover:bg-green-600/80'
-                : swapStatus === 'retrying'
-                  ? 'bg-yellow-500/80 text-white'
-                  : 'bg-gradient-to-r from-pink-500 to-purple-500 text-white hover:from-pink-600 hover:to-purple-600 hover:shadow-lg hover:shadow-pink-500/20'
-          }`}
-          disabled={!isConnected || !tokenIn || !tokenOut || !inputAmount || !outputAmount || isApproving || isSwapping}
-          onClick={isConnected ? handleSwap : () => {}}
-        >
-          {getButtonText()}
-        </button>
-      </div>
-
-      {/* Add reserves curve and price distribution if we have a pair */}
-      {tokenIn && tokenOut && pair && provider && (
-        <>
-          <div className="mt-8">
-            <h3 className="text-xl font-semibold gradient-text mb-4">Reserves Curve</h3>
-            <div className="glass-effect rounded-2xl p-6">
-              <ReservesCurve
-                token0={tokenIn}
-                token1={tokenOut}
-                reserve0={pair.reserves.reserve0}
-                reserve1={pair.reserves.reserve1}
-              />
-            </div>
-          </div>
-
-          <div className="mt-8">
-            <h3 className="text-xl font-semibold gradient-text mb-4">Historical Swap Prices</h3>
-            <div className="glass-effect rounded-2xl p-6">
-              <SwapPriceDistribution
-                token0={tokenIn}
-                token1={tokenOut}
-                pairAddress={pair.address}
-                provider={provider}
-              />
-            </div>
-          </div>
-        </>
-      )}
+    </div>
     </div>
   );
 }; 

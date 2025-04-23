@@ -19,10 +19,10 @@ export const formatAmount = (
   );
   
   const parts = formattedAmount.split('.');
-  if (parts.length === 1) return parts[0];
+  if (parts.length === 1) return parts[0] ?? '';
   
   const integerPart = parts[0];
-  const decimalPart = parts[1].slice(0, displayDecimals);
+  const decimalPart = parts[1]?.slice(0, displayDecimals);
   
   return `${integerPart}${decimalPart ? '.' + decimalPart : ''}`;
 };

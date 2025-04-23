@@ -11,12 +11,39 @@
   );
 }
 
-body {
+/* body {
   margin: 0;
   min-height: 100vh;
   background: rgb(13, 17, 28);
   background: linear-gradient(180deg, rgba(13, 17, 28, 1) 0%, rgba(17, 23, 39, 1) 100%);
   color: white;
+} */
+
+/* App.css */
+.scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #2A2D34;
+  border-radius: 10px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: #1C1E22;
+}
+
+body {
+  background: linear-gradient(180deg, #0e0f11, #0a0b0d);
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
+
+nav a {
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+button {
+  transition: all 0.3s ease-in-out;
 }
 
 .bg-dark {

@@ -74,8 +74,8 @@ export const ReservesCurve: React.FC<ReservesCurveProps> = ({
           {
             label: 'Current Position (P)',
             data: [{ x: r0, y: r1 }],
-            backgroundColor: '#ec4899', // Pink color
-            borderColor: '#ec4899',
+            backgroundColor: '#191B1F',
+            borderColor: '#191B1F',
             pointStyle: 'circle',
             pointRadius: 6,
             pointHoverRadius: 8,
