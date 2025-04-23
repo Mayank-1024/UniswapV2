@@ -2,7 +2,7 @@
 
 <div align="center">
   
-  [[![Vite](https://img.shields.io/badge/Vite-5.x-646CFF.svg)](https://vitejs.dev/)
+    [![Vite](https://img.shields.io/badge/Vite-5.x-646CFF.svg)](https://vitejs.dev/)
     [![React](https://img.shields.io/badge/React-18.x-blue.svg)](https://reactjs.org/)
     [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
     [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue.svg)](https://www.typescriptlang.org/)
@@ -35,7 +35,7 @@
 1. **Clone the repository**
    ```terminal
    git clone https://github.com/Mayank-1024/UniswapV2.git
-   cd uniswap-v2/uniswap-v2-frontend
+   cd UniswapV2/UniswapV2-frontend
    ```
 
 2. **Install dependencies**
@@ -47,8 +47,11 @@
 
 3. **Set up environment variables**
    Edit `.env` with your configuration:
-   ```env
+   ```
+   Private_Key
+   RPC_URL
      ```
+
 
 4. **Start the development server**
    ```terminal
@@ -63,7 +66,7 @@
 ## 🏗️ Project Structure
 
 ```
-uniswap-v2-frontend/
+UniswapV2-frontend/
 ├── src/
 │   ├── components/         
 │   ├── constants/            
@@ -77,7 +80,6 @@ uniswap-v2-frontend/
 ## References
 
 - [Ethereum Development Documentation](https://ethereum.org/en/developers/)
-- [OpenAI API Documentation](https://platform.openai.com/docs/)
 - [Uniswap V2 Whitepaper](https://uniswap.org/whitepaper.pdf)
 
 ## 🔗 Links
